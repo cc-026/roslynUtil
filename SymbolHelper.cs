@@ -89,6 +89,14 @@ public static class SymbolHelper
         return false;
     }
 
+    public static bool Implements(this ITypeSymbol? symbol, Type? type)
+    {
+        if (symbol == null || type == null)
+            return false;
+
+        return Enumerable.Any(symbol.AllInterfaces, @interface => @interface.Matches(type));
+    }
+    
     public static bool Matches(this ITypeSymbol? symbol, Type? type)
     {
         if (symbol == null || type == null)
